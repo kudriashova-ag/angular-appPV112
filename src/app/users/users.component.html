@@ -1,12 +1,24 @@
 <h1>Users</h1>
 
 <div *ngFor="let user of users">
-    <app-user-info [userName]="user.name" [userEmail]="user.email"></app-user-info>
+    <app-user-info [userName]="user.name" [userEmail]="user.email" [userWebsite]="user.website"></app-user-info>
 </div>
 <hr>
 
+<form [formGroup]="myForm" (ngSubmit)="onSubmit2()">
+    <div>
+        <input type="text" name="name" formControlName="userName">
+        <div class="error" *ngIf="myForm.controls['userName'].invalid">Invalid Name</div>
+    </div>
+    <div>
+        <input type="text" name="email" formControlName="userEmail">
+        <div class="error" *ngIf="myForm.controls['userEmail'].invalid && myForm.controls['userEmail'].touched">Invalid Email</div>
+    </div>
+    <button>add user</button>
+</form>
 
-<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+
+<!-- <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
     <div>
         <label for="name">Name:</label>
         <input [(ngModel)]="newName" type="text" name="name" required minlength="3" #name="ngModel">
@@ -18,4 +30,4 @@
         <div [hidden]="email.valid || email.untouched">Name is required</div>
     </div>
     <button [disabled]="myForm.invalid">Add user</button>
-</form>
+</form> -->
